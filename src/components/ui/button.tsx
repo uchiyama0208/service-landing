@@ -1,5 +1,6 @@
 // src/components/ui/button.tsx
-import { ButtonHTMLAttributes } from "react";
+import Link, { LinkProps } from "next/link";
+import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import clsx from "clsx";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -14,23 +15,43 @@ const variants: Record<Variant, string> = {
   ghost: "bg-transparent text-slate-700 hover:bg-slate-100",
 };
 
-type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
-  /** HTML標準のbutton typeのみ許可 */
+// <button>として使う時の型
+type ButtonAsButton = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
   type?: "button" | "submit" | "reset";
-  variant?: Variant;
+  href?: never;
 };
 
-export default function Button({
-  type = "button",
-  className,
-  variant = "primary",
-  ...rest
-}: ButtonProps) {
+// <Link>として使う時の型（アンカー属性もOK）
+type ButtonAsLink = LinkProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
+    href: string;
+    type?: never;
+  };
+
+type Common = { variant?: Variant; className?: string };
+
+type ButtonProps = Common & (ButtonAsButton | ButtonAsLink);
+
+function ButtonImpl(props: ButtonProps) {
+  const { variant = "primary", className } = props;
+  const classes = clsx(base, variants[variant], className);
+
+  if ("href" in props) {
+    const { href, ...rest } = props;
+    return (
+      <Link href={href} {...rest} className={classes}>
+        {props.children}
+      </Link>
+    );
+  }
+
+  const { type = "button", ...rest } = props;
   return (
-    <button
-      type={type}
-      className={clsx(base, variants[variant], className)}
-      {...rest}
-    />
+    <button type={type} {...rest} className={classes}>
+      {props.children}
+    </button>
   );
 }
+
+export default ButtonImpl;
+export const Button = ButtonImpl;
