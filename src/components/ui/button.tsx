@@ -1,53 +1,36 @@
-import { clsx } from 'clsx';
-import Link from 'next/link';
-import {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  ReactNode,
-} from 'react';
+// src/components/ui/button.tsx
+import { ButtonHTMLAttributes } from "react";
+import clsx from "clsx";
+
+type Variant = "primary" | "secondary" | "ghost";
 
 const base =
-  'inline-flex items-center justify-center rounded-2xl px-6 py-3 text-sm font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2';
-const variants: Record<'primary' | 'secondary' | 'ghost', string> = {
+  "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition";
+const variants: Record<Variant, string> = {
   primary:
-    'bg-brand-primary text-white shadow-glow hover:bg-brand-secondary focus-visible:outline-brand-secondary',
+    "bg-blue-600 text-white hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
   secondary:
-    'bg-white text-brand-secondary ring-1 ring-inset ring-brand-primary/30 hover:ring-brand-primary/60 focus-visible:outline-brand-primary',
-  ghost:
-    'bg-transparent text-brand-secondary hover:text-brand-primary focus-visible:outline-brand-primary',
+    "bg-white text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50",
+  ghost: "bg-transparent text-slate-700 hover:bg-slate-100",
 };
 
-type CommonProps = {
-  children: ReactNode;
-  className?: string;
-  variant?: 'primary' | 'secondary' | 'ghost';
+type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
+  /** HTML標準のbutton typeのみ許可 */
+  type?: "button" | "submit" | "reset";
+  variant?: Variant;
 };
 
-type ButtonAsButton = CommonProps &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'className'> & { href?: undefined };
-
-type ButtonAsLink = CommonProps &
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'className' | 'type'> & {
-    href: string;
-    type?: undefined;
-  };
-
-export type ButtonProps = ButtonAsButton | ButtonAsLink;
-
-export function Button({ className, variant = 'primary', children, ...props }: ButtonProps) {
-  if ('href' in props && props.href) {
-    const { href, ...rest } = props;
-    return (
-      <Link href={href} className={clsx(base, variants[variant], className)} {...rest}>
-        {children}
-      </Link>
-    );
-  }
-
-  const { type = 'button', ...rest } = props;
+export default function Button({
+  type = "button",
+  className,
+  variant = "primary",
+  ...rest
+}: ButtonProps) {
   return (
-    <button type={type} className={clsx(base, variants[variant], className)} {...rest}>
-      {children}
-    </button>
+    <button
+      type={type}
+      className={clsx(base, variants[variant], className)}
+      {...rest}
+    />
   );
 }
