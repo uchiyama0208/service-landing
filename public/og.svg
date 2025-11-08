@@ -1,0 +1,13 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="48" fill="#1D4ED8" />
+  <rect x="80" y="120" width="1040" height="390" rx="36" fill="#F8FAFC" opacity="0.9" />
+  <text x="600" y="260" text-anchor="middle" fill="#1D4ED8" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="56" font-weight="700">
+    NightBase
+  </text>
+  <text x="600" y="320" text-anchor="middle" fill="#2563EB" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="28" font-weight="500">
+    夜の現場を、次の標準へ。
+  </text>
+  <text x="600" y="400" text-anchor="middle" fill="#0F172A" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="22">
+    キャバクラ・コンカフェ運営の全部入りSaaS
+  </text>
+</svg>

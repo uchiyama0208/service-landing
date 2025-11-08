@@ -1,0 +1,6 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="48" fill="#2563EB"/>
+  <path d="M200 180C200 162.327 214.327 148 232 148H968C985.673 148 1000 162.327 1000 180V450C1000 467.673 985.673 482 968 482H232C214.327 482 200 467.673 200 450V180Z" fill="#1D4ED8" opacity="0.9"/>
+  <text x="600" y="320" text-anchor="middle" fill="white" font-size="64" font-family="'Inter', sans-serif" font-weight="700">Operations Tips</text>
+  <text x="600" y="390" text-anchor="middle" fill="#FACC15" font-size="28" font-family="'Inter', sans-serif">NightBase Knowledge</text>
+</svg>
